@@ -23,9 +23,12 @@ class ImageMatrix extends Component {
 	}
 
 	passPathAndroid() {
-		RNImageMatrix.getImageUrl(this.props.imagePath, 3, 3,
+        let rows        = this.props.rows;
+        let columns     = this.props.columns;
+		RNImageMatrix.getImageUrl(this.props.imagePath, this.props.type ,rows, columns,
 			(images) => {
-				console.log('Result ',images);
+                console.log('Resultimages ',images);
+                this.props.getImagesMatrix(images)
 			});
 	}
     async passPathIos() {
@@ -33,26 +36,24 @@ class ImageMatrix extends Component {
         let rows        = this.props.rows;
         let columns     = this.props.columns;
             try {
-            const images = await RNImageMatrix.getImageUrl(this.props.imagePath, rows, columns);
+            const images = await RNImageMatrix.getImageUrl(this.props.imagePath,this.props.type,rows, columns);
             // const images = await RNImageMatrix.getName();
-            console.log('images ', images)
+            console.log('images ', imagePath)
             this.props.getImagesMatrix(images)
             //return images;
         } catch(e) {
             console.error(e);
         }
     }
-
+    // <View style={{flex: 1}}>
+    //     <Text>Image is Downloaded Successfuly, Image Path : </Text>
+    //     <Text>{this.props.imagePath}</Text>
+    //     <TouchableOpacity onPress={() => this.handleAnd()}>
+    //         <Text>{this.props.imagePath}</Text>
+    //     </TouchableOpacity>
+    // </View>
     render() {
-        return (
-            <View style={{flex: 1}}>
-                <Text>Image is Downloaded Successfuly, Image Path : </Text>
-                <Text>{this.props.imagePath}</Text>
-				<TouchableOpacity onPress={() => this.handleAnd()}>
-					<Text>{this.props.imagePath}</Text>
-				</TouchableOpacity>
-            </View>
-        );
+        return (null);
     }
   }
 
