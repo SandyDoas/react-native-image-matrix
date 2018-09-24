@@ -61,7 +61,7 @@ public class RNImageMatrixModule extends ReactContextBaseJavaModule {
             subBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
             fOut.close();
           }catch(Exception ex){
-            callback.invoke(path);
+            //callback.invoke(path);
           }
           srcs.pushString(subImgPath+count+".jpg");
           count++;
