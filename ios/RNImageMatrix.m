@@ -12,6 +12,7 @@
 RCT_EXPORT_MODULE()
 RCT_EXPORT_METHOD(
         getImageUrl:(NSString *)imageUrl
+        type:(NSString *)type
         rows:(NSInteger *)rows
         columns:(NSInteger *)columns
         resolver: (RCTPromiseResolveBlock)resolve
@@ -25,7 +26,7 @@ RCT_EXPORT_METHOD(
     NSMutableArray *imagesPaths = [NSMutableArray new];
     int count = 0;
     for(UIImage *image in images) {
-        NSString *imagePath = [[self documentPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%d.jpg", count]];
+        NSString *imagePath = [[self documentPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@%d.jpg",type,count]];
         NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
         [imageData writeToFile:imagePath atomically:YES];
         [imagesPaths addObject:imagePath];
