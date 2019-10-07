@@ -46,14 +46,14 @@ public class RNImageMatrixModule extends ReactContextBaseJavaModule {
       int height = myBitmap.getHeight();
       int subImgWidth = width/columns;
       int subImgHeight = height/rows;
-      
+      //String subImgPath = "/data/user/0/com.bizzifyevents/files/"+type; 
       String subImgPath = path.substring(0, path.lastIndexOf("/")+1) + type; 
       int count = 0 ;
       
       for(int y = 0 ; y < height-1 ; y = y+subImgHeight ){
         for(int x = 0 ; x < width-1 ; x = x+subImgWidth ){  
-          
-          Bitmap subBitmap = Bitmap.createBitmap(myBitmap,x,y,subImgWidth,subImgHeight);
+          if( y+subImgHeight <=height && x+subImgWidth <= width)
+         { Bitmap subBitmap = Bitmap.createBitmap(myBitmap,x,y,subImgWidth,subImgHeight);
 
           try{
             File file = new File(subImgPath+count+".jpg");
@@ -66,6 +66,7 @@ public class RNImageMatrixModule extends ReactContextBaseJavaModule {
           }
           srcs.pushString(subImgPath+count+".jpg");
           count++;
+        }
         }
       }
       callback.invoke(srcs);
